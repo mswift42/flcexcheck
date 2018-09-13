@@ -15,7 +15,7 @@ class FlCexApp extends StatelessWidget {
           child: Text('Some Cex Stuff')
         )
       )
-    )
+    );
   }
 }
 
