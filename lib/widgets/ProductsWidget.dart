@@ -24,6 +24,28 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Text(product.title);
+    return Card(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: ProductImage(product.thumbnail),
+            title: Text(product.title),
+            subtitle: Text(product.price),
+          )
+        ],
+      )
+
+    );
+  }
+}
+
+class ProductImage extends StatelessWidget {
+  final String imageurl;
+
+  ProductImage(this.imageurl);
+  @override
+  Widget build(BuildContext context) {
+    return Image
   }
 }
