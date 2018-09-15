@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flcexcheck/product.dart' show Product;
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductsWidget extends StatelessWidget {
   final List<Product> products;
@@ -29,10 +30,10 @@ class ProductCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: ProductImage(product.thumbnail),
             title: Text(product.title),
             subtitle: Text(product.price),
-          )
+          ),
+          ProductImage(product.thumbnail, product.url),
         ],
       )
 
@@ -42,10 +43,19 @@ class ProductCard extends StatelessWidget {
 
 class ProductImage extends StatelessWidget {
   final String imageurl;
+  final String url;
 
-  ProductImage(this.imageurl);
+  ProductImage(this.imageurl, this.url);
   @override
   Widget build(BuildContext context) {
-    return Image
+    return GestureDetector(
+      onTap: () => _launchUrl(url),
+      child:
+        Image.network(imageurl),
+    );
   }
+}
+
+_launchUrl(String url) async {
+    await launch(url);
 }
