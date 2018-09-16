@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flcexcheck/mockproducts.dart';
-import 'package:flcexcheck/widgets/ProductsWidget.dart';
+import 'package:flcexcheck/widgets/productswidget.dart';
 
 void main() => runApp(new FlCexApp());
 
