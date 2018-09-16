@@ -8,14 +8,9 @@ class ProductsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    return ListView.builder(
-//      itemCount: products.length,
-//        itemBuilder: (context, int) {
-//        return new ProductCard(products[int]);
-//        }
-//    );
     return GridView.extent(
         maxCrossAxisExtent: 320.0,
+        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
         children: products.map((i) => ProductCard(i)).toList());
   }
 }
@@ -27,19 +22,21 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        ListTile(
-          title: Text(product.title),
-          subtitle: Text(product.price),
-        ),
-        Expanded(
-          child:
-        ProductImage(product.thumbnail, product.url),
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.all(4.0),
+        child: Card(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            title: Text(product.title),
+            subtitle: Text(product.price),
+          ),
+          Expanded(
+            child: ProductImage(product.thumbnail, product.url),
+          ),
+        ],
+      ),
     ));
   }
 }
@@ -54,8 +51,8 @@ class ProductImage extends StatelessWidget {
     return GestureDetector(
       onTap: () => _launchUrl(url),
       child: Image.network(
-          imageurl,
-          fit: BoxFit.cover,
+        imageurl,
+        fit: BoxFit.cover,
         height: 180.00,
         width: 300.00,
       ),
