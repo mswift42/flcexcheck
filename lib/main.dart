@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flcexcheck/mockproducts.dart';
 import 'package:flcexcheck/widgets/productswidget.dart';
+import 'package:flcexcheck/widgets/searchwidget.dart';
 
 void main() => runApp(new FlCexApp());
 
@@ -14,7 +15,7 @@ class FlCexApp extends StatelessWidget {
           title: Text('CexCheck'),
         ),
         body: Center(
-          child: ProductsWidget(mockProducts)
+          child: SearchWidget(),
         )
       )
     );
