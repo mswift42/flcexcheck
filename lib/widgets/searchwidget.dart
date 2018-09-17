@@ -8,7 +8,7 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   Store activeStore = _stores[0];
   String searchquery = "Search Query";
-  static final  _stores = [
+  static final _stores = [
     Store("Rose Street", "54"),
     Store("Cameron Toll", "3015"),
     Store("Leith", "3117")
@@ -36,13 +36,11 @@ class _SearchWidgetState extends State<SearchWidget> {
             controller: controller,
             onSubmitted: _searchProduct,
           ),
-          Text("hallo"),
           Row(
-            children: _stores.map((i) => Radio<Store>(
-              value: i,
-              groupValue: activeStore,
-              onChanged: handleActiveStoreChanged,
-            )).toList(),
+            children: _stores
+                .map((i) =>
+                    _radioWidget(i, activeStore, handleActiveStoreChanged))
+                .toList(),
           ),
         ],
       ),
@@ -50,3 +48,16 @@ class _SearchWidgetState extends State<SearchWidget> {
   }
 }
 
+Widget _radioWidget(
+    Store value, Store groupvalue, ValueChanged<Store> handler) {
+  return Row(
+    children: <Widget>[
+      Text(value.location),
+      Radio<Store>(
+        value: value,
+        groupValue: groupvalue,
+        onChanged: handler,
+      ),
+    ],
+  );
+}
