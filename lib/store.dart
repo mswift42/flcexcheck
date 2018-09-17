@@ -1,5 +1,5 @@
 class Store {
-  String location, id;
+  final String location, id;
 
-  Store(this.location, this.id);
+  const Store(this.location, this.id);
 }
