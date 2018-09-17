@@ -37,6 +37,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             onSubmitted: _searchProduct,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _stores
                 .map((i) =>
                     _radioWidget(i, activeStore, handleActiveStoreChanged))
