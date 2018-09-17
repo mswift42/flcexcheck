@@ -21,6 +21,12 @@ class _SearchWidgetState extends State<SearchWidget> {
     });
   }
 
+  void handleActiveStoreChanged(Store store) {
+    setState(() {
+      activeStore = store;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,10 +38,15 @@ class _SearchWidgetState extends State<SearchWidget> {
           ),
           Text(searchquery),
           Row(
-            children: <Widget>[Radio<int>()],
+            children: _stores.map((i) => Radio<Store>(
+              value: i,
+              groupValue: activeStore,
+              onChanged: handleActiveStoreChanged,
+            )).toList(),
           )
         ],
       ),
     );
   }
 }
+
