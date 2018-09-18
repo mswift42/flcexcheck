@@ -19,20 +19,25 @@ class _SearchWidgetState extends State<SearchWidget> {
   ];
   final controller = TextEditingController();
 
-  void _searchProduct(String inp) {
-    setState(() {
-      searchquery = inp;
-    });
+  void _searchProduct(String inp) async {
+    if (inp != '') {
+      var prods = await fetchProduct(inp, activeStore.id);
+      setState(() {
+        searchquery = inp;
+        print(prods);
+      });
+    }
   }
 
-  void handleActiveStoreChanged(Store store) {
+  void handleActiveStoreChanged(Store store) async {
+    _searchProduct(searchquery);
     setState(() {
       activeStore = store;
     });
   }
 
   String prodUrl(String query, String storeid) {
-    return 'https://cxchecker.appspot.com/querycx?query=$query&location=$storeid'
+    return 'https://cxchecker.appspot.com/querycx?query=$query&location=$storeid';
   }
 
   Future<List<Product>> fetchProduct(String query, String storeid) async {
@@ -40,9 +45,10 @@ class _SearchWidgetState extends State<SearchWidget> {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
+      print(response.body);
       // return Product.fromJson(json.decode(response.body));
       var decoded = json.decode(response.body);
-      return decoded.map((i) => Product.fromJson(i));
+        return decoded.map((i) => Product.fromJson(i));
     } else {
       throw Exception("Failed to load product");
     }
