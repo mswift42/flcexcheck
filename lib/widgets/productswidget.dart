@@ -30,7 +30,7 @@ class ProductCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: Text(product.title),
-            subtitle: Text(product.price),
+            subtitle: Text(product.price.toString()),
           ),
           Expanded(
             child: ProductImage(product.thumbnail, product.url),

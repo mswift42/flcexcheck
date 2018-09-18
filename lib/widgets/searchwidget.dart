@@ -24,7 +24,6 @@ class _SearchWidgetState extends State<SearchWidget> {
       var prods = await fetchProduct(inp, activeStore.id);
       setState(() {
         searchquery = inp;
-        print(prods);
       });
     }
   }
@@ -45,10 +44,10 @@ class _SearchWidgetState extends State<SearchWidget> {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      print(response.body);
       // return Product.fromJson(json.decode(response.body));
-      var decoded = json.decode(response.body);
-        return decoded.map((i) => Product.fromJson(i));
+      var decoded = json.decode(response.body) as List;
+     print(decoded);
+        return decoded.map((i) => Product.fromJson(i)).toList();
     } else {
       throw Exception("Failed to load product");
     }
