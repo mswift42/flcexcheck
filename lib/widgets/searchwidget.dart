@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flcexcheck/store.dart' show Store;
+import 'package:flcexcheck/product.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 class SearchWidget extends StatefulWidget {
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -25,6 +29,21 @@ class _SearchWidgetState extends State<SearchWidget> {
     setState(() {
       activeStore = store;
     });
+  }
+
+  String prodUrl(String query, String storeid) {
+    return 'https://cxchecker.appspot.com/querycx?query=$query&location=$storeid'
+  }
+
+  Future<Product> fetchProduct(String query, String storeid) async {
+    final url = prodUrl(query, storeid);
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return Product.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("Failed to load product");
+    }
   }
 
   @override
