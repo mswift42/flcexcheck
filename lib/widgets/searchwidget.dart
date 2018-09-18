@@ -35,12 +35,14 @@ class _SearchWidgetState extends State<SearchWidget> {
     return 'https://cxchecker.appspot.com/querycx?query=$query&location=$storeid'
   }
 
-  Future<Product> fetchProduct(String query, String storeid) async {
+  Future<List<Product>> fetchProduct(String query, String storeid) async {
     final url = prodUrl(query, storeid);
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      return Product.fromJson(json.decode(response.body));
+      // return Product.fromJson(json.decode(response.body));
+      var decoded = json.decode(response.body);
+      return decoded.map((i) => Product.fromJson(i));
     } else {
       throw Exception("Failed to load product");
     }
