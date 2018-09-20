@@ -47,7 +47,11 @@ class _SearchWidgetState extends State<SearchWidget> {
       // return Product.fromJson(json.decode(response.body));
       var decoded = json.decode(response.body) as List;
      print(decoded);
-        return decoded.map((i) => Product.fromJson(i)).toList();
+        if (decoded != null) {
+          return decoded.map((i) => Product.fromJson(i)).toList();
+        } else {
+          return [];
+        }
     } else {
       throw Exception("Failed to load product");
     }
