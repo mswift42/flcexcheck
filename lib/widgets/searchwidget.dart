@@ -4,6 +4,7 @@ import 'package:flcexcheck/product.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:flcexcheck/widgets/productswidget.dart';
 
 class SearchWidget extends StatefulWidget {
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -24,7 +25,13 @@ class _SearchWidgetState extends State<SearchWidget> {
       var prods = await fetchProduct(inp, activeStore.id);
       setState(() {
         searchquery = inp;
+
       });
+      Navigator.of(context).push(
+        new MaterialPageRoute(builder:
+        (context) => new ProductsWidget(prods)
+        )
+      );
     }
   }
 
