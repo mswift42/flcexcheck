@@ -29,8 +29,9 @@ class _SearchWidgetState extends State<SearchWidget> {
       });
       Navigator.of(context).push(
         new MaterialPageRoute(builder:
-        (context) => new ProductsWidget(prods)
-        )
+        (context) => Scaffold(body: _showResultsBody(fetchProduct(searchquery, activeStore.id)),
+        ),
+        ),
       );
     }
   }
@@ -51,9 +52,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      // return Product.fromJson(json.decode(response.body));
       var decoded = json.decode(response.body) as List;
-     print(decoded);
         if (decoded != null) {
           return decoded.map((i) => Product.fromJson(i)).toList();
         } else {
@@ -100,7 +99,7 @@ Widget _radioWidget(
   );
 }
 
-FutureBuilder<List<Product>> _showResults(String query, storeid,
+FutureBuilder<List<Product>> _showResultsBody(
     Future<List<Product>> handler) {
   return FutureBuilder(
     future: handler,
