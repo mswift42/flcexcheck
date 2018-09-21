@@ -11,8 +11,7 @@ class ProductsWidget extends StatelessWidget {
     if (products.length == 0) {
       return Container(
         child: Center(
-          child:
-          Text("No results found."),
+          child: Text("No results found :("),
         ),
       );
     }
@@ -30,10 +29,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
-        onTap: () => _launchUrl(product.url),
-    child:  Container(
+      onTap: () => _launchUrl(product.url),
+      child: Container(
         padding: EdgeInsets.all(4.0),
         child: Card(
           child: Column(
@@ -52,7 +50,7 @@ class ProductCard extends StatelessWidget {
             ],
           ),
         ),
-    ),
+      ),
     );
   }
 }
@@ -63,10 +61,10 @@ class ProductImage extends StatelessWidget {
   ProductImage(this.imageurl);
   @override
   Widget build(BuildContext context) {
-      return Image.network(
-        imageurl,
-        fit: BoxFit.contain,
-        width: 300.00,
+    return Image.network(
+      imageurl,
+      fit: BoxFit.contain,
+      width: 300.00,
     );
   }
 }

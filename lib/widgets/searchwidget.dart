@@ -12,7 +12,7 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   Store activeStore = _stores[0];
-  String searchquery = "Search Query";
+  String searchquery = "";
   static final _stores = [
     Store("Rose Street", "54"),
     Store("Cameron Toll", "3017"),
@@ -22,14 +22,15 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   void _searchProduct(String inp) async {
     if (inp != '') {
-      var prods = await fetchProduct(inp, activeStore.id);
       setState(() {
         searchquery = inp;
       });
       Navigator.of(context).push(
         new MaterialPageRoute(
           builder: (context) => Scaffold(
-                appBar: AppBar(title: Text("Results")),
+                appBar: AppBar(
+                    title: Text("Showing $searchquery in ${activeStore.location}.",
+                    textScaleFactor: 0.7,)),
                 body:
                     _showResultsBody(fetchProduct(searchquery, activeStore.id)),
               ),
@@ -75,8 +76,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               controller: controller,
               onSubmitted: _searchProduct,
             ),
-            padding: EdgeInsets.symmetric(vertical: 6.00,
-            horizontal: 8.00),
+            padding: EdgeInsets.symmetric(vertical: 6.00, horizontal: 8.00),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -105,18 +105,13 @@ Widget _radioWidget(
   );
 }
 
-Widget _resultsScaffold(Widget body) {
-  return Scaffold(
-    body: body,
-    appBar: AppBar(title: Text("Results")),
-  );
-}
-
 FutureBuilder<List<Product>> _showResultsBody(Future<List<Product>> handler) {
   return FutureBuilder(
     future: handler,
     builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
       switch (snapshot.connectionState) {
+        case ConnectionState.none:
+          return Container(child: Center(child: Text("Please try again.")));
         case ConnectionState.active:
         case ConnectionState.waiting:
           return Container(child: Center(child: CircularProgressIndicator()));
