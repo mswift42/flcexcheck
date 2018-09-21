@@ -104,8 +104,18 @@ FutureBuilder<List<Product>> _showResults(String query, storeid,
     Future<List<Product>> handler) {
   return FutureBuilder(
     future: handler,
-    builder: (context, snapshot) {
-      return ProductsWidget(snapshot.data);
+    builder: (BuildContext context,
+        AsyncSnapshot<List<Product>> snapshot) {
+     switch (snapshot.connectionState) {
+       case ConnectionState.active:
+       case ConnectionState.waiting:
+         return Container(child: CircularProgressIndicator());
+       case ConnectionState.done:
+         if (snapshot.hasError) {
+           return Text("Something went wrong.");
+         }
+         return ProductsWidget(snapshot.data);
+     }
     },
   );
 }
