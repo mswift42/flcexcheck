@@ -117,7 +117,9 @@ FutureBuilder<List<Product>> _showResultsBody(
      switch (snapshot.connectionState) {
        case ConnectionState.active:
        case ConnectionState.waiting:
-         return Container(child: CircularProgressIndicator());
+         return Container(
+             child: Center(
+                 child: CircularProgressIndicator()));
        case ConnectionState.done:
          if (snapshot.hasError) {
            return Text("Something went wrong.");
