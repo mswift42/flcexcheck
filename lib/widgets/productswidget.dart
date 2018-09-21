@@ -23,21 +23,24 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(4.0),
+        padding: EdgeInsets.all(4.0),
         child: Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            title: Text(product.title),
-            subtitle: Text(product.price.toString()),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
+                child: ProductImage(product.thumbnail, product.url),
+              ),
+              ListTile(
+                title: Text(product.title),
+                subtitle: Text(
+                  product.price.toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: ProductImage(product.thumbnail, product.url),
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 }
 
@@ -52,8 +55,7 @@ class ProductImage extends StatelessWidget {
       onTap: () => _launchUrl(url),
       child: Image.network(
         imageurl,
-        fit: BoxFit.cover,
-        height: 180.00,
+        fit: BoxFit.contain,
         width: 300.00,
       ),
     );
