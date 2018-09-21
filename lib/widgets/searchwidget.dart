@@ -15,8 +15,8 @@ class _SearchWidgetState extends State<SearchWidget> {
   String searchquery = "Search Query";
   static final _stores = [
     Store("Rose Street", "54"),
-    Store("Cameron Toll", "3015"),
-    Store("Leith", "3117")
+    Store("Cameron Toll", "3017"),
+    Store("Leith", "3115")
   ];
   final controller = TextEditingController();
 
@@ -29,7 +29,9 @@ class _SearchWidgetState extends State<SearchWidget> {
       });
       Navigator.of(context).push(
         new MaterialPageRoute(builder:
-        (context) => Scaffold(body: _showResultsBody(fetchProduct(searchquery, activeStore.id)),
+        (context) => Scaffold(
+          appBar: AppBar(title: Text("Results")),
+          body: _showResultsBody(fetchProduct(searchquery, activeStore.id)),
         ),
         ),
       );
@@ -96,6 +98,13 @@ Widget _radioWidget(
         onChanged: handler,
       ),
     ],
+  );
+}
+
+Widget _resultsScaffold(Widget body) {
+  return Scaffold(
+    body: body,
+    appBar: AppBar(title: Text("Results")),
   );
 }
 
