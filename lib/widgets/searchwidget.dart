@@ -25,14 +25,14 @@ class _SearchWidgetState extends State<SearchWidget> {
       var prods = await fetchProduct(inp, activeStore.id);
       setState(() {
         searchquery = inp;
-
       });
       Navigator.of(context).push(
-        new MaterialPageRoute(builder:
-        (context) => Scaffold(
-          appBar: AppBar(title: Text("Results")),
-          body: _showResultsBody(fetchProduct(searchquery, activeStore.id)),
-        ),
+        new MaterialPageRoute(
+          builder: (context) => Scaffold(
+                appBar: AppBar(title: Text("Results")),
+                body:
+                    _showResultsBody(fetchProduct(searchquery, activeStore.id)),
+              ),
         ),
       );
     }
@@ -55,11 +55,11 @@ class _SearchWidgetState extends State<SearchWidget> {
 
     if (response.statusCode == 200) {
       var decoded = json.decode(response.body) as List;
-        if (decoded != null) {
-          return decoded.map((i) => Product.fromJson(i)).toList();
-        } else {
-          return [];
-        }
+      if (decoded != null) {
+        return decoded.map((i) => Product.fromJson(i)).toList();
+      } else {
+        return [];
+      }
     } else {
       throw Exception("Failed to load product");
     }
@@ -70,9 +70,13 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Container(
       child: Column(
         children: <Widget>[
-          TextField(
-            controller: controller,
-            onSubmitted: _searchProduct,
+          Container(
+            child: TextField(
+              controller: controller,
+              onSubmitted: _searchProduct,
+            ),
+            padding: EdgeInsets.symmetric(vertical: 6.00,
+            horizontal: 8.00),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -108,24 +112,20 @@ Widget _resultsScaffold(Widget body) {
   );
 }
 
-FutureBuilder<List<Product>> _showResultsBody(
-    Future<List<Product>> handler) {
+FutureBuilder<List<Product>> _showResultsBody(Future<List<Product>> handler) {
   return FutureBuilder(
     future: handler,
-    builder: (BuildContext context,
-        AsyncSnapshot<List<Product>> snapshot) {
-     switch (snapshot.connectionState) {
-       case ConnectionState.active:
-       case ConnectionState.waiting:
-         return Container(
-             child: Center(
-                 child: CircularProgressIndicator()));
-       case ConnectionState.done:
-         if (snapshot.hasError) {
-           return Text("Something went wrong.");
-         }
-         return ProductsWidget(snapshot.data);
-     }
+    builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
+      switch (snapshot.connectionState) {
+        case ConnectionState.active:
+        case ConnectionState.waiting:
+          return Container(child: Center(child: CircularProgressIndicator()));
+        case ConnectionState.done:
+          if (snapshot.hasError) {
+            return Text("Something went wrong.");
+          }
+          return ProductsWidget(snapshot.data);
+      }
     },
   );
 }
