@@ -99,3 +99,13 @@ Widget _radioWidget(
     ],
   );
 }
+
+FutureBuilder<List<Product>> _showResults(String query, storeid,
+    Future<List<Product>> handler) {
+  return FutureBuilder(
+    future: handler,
+    builder: (context, snapshot) {
+      return ProductsWidget(snapshot.data);
+    },
+  );
+}
