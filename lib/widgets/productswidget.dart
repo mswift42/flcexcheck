@@ -44,7 +44,10 @@ class ProductCard extends StatelessWidget {
                 title: Text(product.title),
                 subtitle: Text(
                  (product.price == null) ? "0" :
-                    product.price.toStringAsFixed(0)
+                    product.price.toStringAsFixed(
+                      product.price.truncateToDouble() == product.price ?
+                          0 : 2
+                    )
                 ),
               ),
             ],

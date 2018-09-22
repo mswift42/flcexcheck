@@ -9,6 +9,8 @@ class Product {
     dynamic price;
     if (json['price'] is int) {
       price = json['price'].toDouble();
+    } else {
+      price = json['price'];
     }
     return Product(
       json['title'],
