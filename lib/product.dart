@@ -1,15 +1,19 @@
 class Product {
   String title, thumbnail;
-  int price;
+  double price;
   String url;
 
   Product(this.title, this.thumbnail, this.price, this.url);
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    dynamic price;
+    if (json['price'] is int) {
+      price = json['price'].toDouble();
+    }
     return Product(
       json['title'],
       json['thumbnail'],
-      json['price'],
+      price,
       json['url'],
     );
   }
