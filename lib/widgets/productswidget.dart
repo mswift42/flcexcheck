@@ -43,7 +43,10 @@ class ProductCard extends StatelessWidget {
               ListTile(
                 title: Text(product.title),
                 subtitle: Text(
-                  product.price.toString(),
+                  product.price.toStringAsFixed(
+                    product.price.truncateToDouble() ==
+                      product.price ? 0 : 2
+                  ),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
