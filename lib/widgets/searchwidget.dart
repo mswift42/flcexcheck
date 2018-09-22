@@ -29,7 +29,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         new MaterialPageRoute(
           builder: (context) => Scaffold(
                 appBar: AppBar(
-                    title: Text("Showing $searchquery in ${activeStore.location}.",
+                    title: Text("Showing $searchquery at ${activeStore.location}.",
                     textScaleFactor: 0.7,)),
                 body:
                     _showResultsBody(fetchProduct(searchquery, activeStore.id)),
