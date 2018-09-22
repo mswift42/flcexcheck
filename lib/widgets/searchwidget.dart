@@ -117,7 +117,7 @@ FutureBuilder<List<Product>> _showResultsBody(Future<List<Product>> handler) {
           return Container(child: Center(child: CircularProgressIndicator()));
         case ConnectionState.done:
           if (snapshot.hasError) {
-            return Text("Something went wrong.");
+            return Text("Something went wrong: ${snapshot.error}");
           }
           return ProductsWidget(snapshot.data);
       }
