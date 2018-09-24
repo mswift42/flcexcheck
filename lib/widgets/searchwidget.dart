@@ -22,9 +22,6 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   void _searchProduct(String inp) async {
     if (inp != '') {
-      setState(() {
-        searchquery = inp;
-      });
       Navigator.of(context).push(
         new MaterialPageRoute(
           builder: (context) => Scaffold(
@@ -37,6 +34,12 @@ class _SearchWidgetState extends State<SearchWidget> {
         ),
       );
     }
+  }
+
+  void _setSearchQueryText(String inp) {
+    setState(() {
+      searchquery = inp;
+    });
   }
 
   void handleActiveStoreChanged(Store store) async {
@@ -75,6 +78,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             child: TextField(
               controller: controller,
               onSubmitted: _searchProduct,
+              onChanged: _setSearchQueryText,
             ),
             padding: EdgeInsets.symmetric(vertical: 6.00, horizontal: 8.00),
           ),
