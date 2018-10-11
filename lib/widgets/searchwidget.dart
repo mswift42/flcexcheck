@@ -109,6 +109,13 @@ Widget _radioWidget(
   );
 }
 
+Widget _lastSearch(
+  String value) {
+  return Container(
+    child: Text(value),
+  );
+}
+
 FutureBuilder<List<Product>> _showResultsBody(Future<List<Product>> handler) {
   return FutureBuilder(
     future: handler,
