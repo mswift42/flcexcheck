@@ -8,7 +8,7 @@ import 'package:flcexcheck/widgets/productswidget.dart';
 import 'package:flcexcheck/last_search_service.dart';
 
 class SearchWidget extends StatefulWidget {
-  final LastSearchService searchServie;
+  final LastSearchService searchServie = LastSearchService();
   _SearchWidgetState createState() => _SearchWidgetState();
 }
 
@@ -26,6 +26,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   void _searchProduct(String inp) async {
     if (inp != '') {
       _lastSearches.add(inp);
+      widget.searchServie.writeSearches(_lastSearches);
       Navigator.of(context).push(
         new MaterialPageRoute(
           builder: (context) => Scaffold(
@@ -51,16 +52,23 @@ class _SearchWidgetState extends State<SearchWidget> {
     super.initState();
     widget.searchServie.readSearches().then((List value) {
       setState((){
-        _lastSearches = value;
+        _lastSearches = value ?? [];
       });
     });
 
   }
 
+
   void handleActiveStoreChanged(Store store) async {
     _searchProduct(searchquery);
     setState(() {
       activeStore = store;
+    });
+  }
+
+  void _handlePillTap(String inp) {
+    setState(() {
+      controller.text = inp;
     });
   }
 
@@ -107,7 +115,7 @@ class _SearchWidgetState extends State<SearchWidget> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _lastSearches.map((i) => _lastSearchWidget(i)).toList(),
+            children: _lastSearches.map((i) => _lastSearchWidget(i, _handlePillTap)).toList(),
           )
         ],
       ),
@@ -130,9 +138,15 @@ Widget _radioWidget(
 }
 
 Widget _lastSearchWidget(
-  String value) {
-  return Container(
-    child: Text(value),
+  String value, handler ) {
+  return GestureDetector(
+    onTap: handler(value),
+    child: Container(
+    child: Chip(
+      label: Text(value),
+
+    )
+   ),
   );
 }
 
