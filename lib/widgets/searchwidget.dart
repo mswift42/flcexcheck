@@ -5,8 +5,10 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flcexcheck/widgets/productswidget.dart';
+import 'package:flcexcheck/last_search_service.dart';
 
 class SearchWidget extends StatefulWidget {
+  final LastSearchService searchServie;
   _SearchWidgetState createState() => _SearchWidgetState();
 }
 
@@ -23,6 +25,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   void _searchProduct(String inp) async {
     if (inp != '') {
+      _lastSearches.add(inp);
       Navigator.of(context).push(
         new MaterialPageRoute(
           builder: (context) => Scaffold(
@@ -43,12 +46,24 @@ class _SearchWidgetState extends State<SearchWidget> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    widget.searchServie.readSearches().then((List value) {
+      setState((){
+        _lastSearches = value;
+      });
+    });
+
+  }
+
   void handleActiveStoreChanged(Store store) async {
     _searchProduct(searchquery);
     setState(() {
       activeStore = store;
     });
   }
+
 
   String prodUrl(String query, String storeid) {
     return 'https://cxchecker.appspot.com/querycx?query=$query&location=$storeid';
@@ -92,7 +107,7 @@ class _SearchWidgetState extends State<SearchWidget> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _lastSearches.map((i) => _lastSearchWidget(i)),
+            children: _lastSearches.map((i) => _lastSearchWidget(i)).toList(),
           )
         ],
       ),
