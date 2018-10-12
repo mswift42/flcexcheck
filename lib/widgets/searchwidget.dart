@@ -13,6 +13,7 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   Store activeStore = _stores[0];
   String searchquery = "";
+  List<String> _lastSearches = [];
   static final _stores = [
     Store("Rose Street", "54"),
     Store("Cameron Toll", "3017"),
@@ -89,6 +90,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                     _radioWidget(i, activeStore, handleActiveStoreChanged))
                 .toList(),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: _lastSearches.map((i) => _lastSearchWidget(i)),
+          )
         ],
       ),
     );
@@ -109,7 +114,7 @@ Widget _radioWidget(
   );
 }
 
-Widget _lastSearch(
+Widget _lastSearchWidget(
   String value) {
   return Container(
     child: Text(value),

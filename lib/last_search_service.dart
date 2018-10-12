@@ -4,7 +4,6 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:async';
 
 class LastSearchService {
-  List<String> Searches = [];
   final String lastSearchesFile = 'lastsearches.txt';
 
   Future<String> get _localPath async {
