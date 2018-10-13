@@ -15,7 +15,7 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   Store activeStore = _stores[0];
   String searchquery = "";
-  List<String> _lastSearches = [];
+  Set<String> _lastSearches = Set();
   static final _stores = [
     Store("Rose Street", "54"),
     Store("Cameron Toll", "3017"),
@@ -26,13 +26,15 @@ class _SearchWidgetState extends State<SearchWidget> {
   void _searchProduct(String inp) async {
     if (inp != '') {
       _lastSearches.add(inp);
-      widget.searchServie.writeSearches(_lastSearches);
+      widget.searchServie.writeSearches(_lastSearches.toList());
       Navigator.of(context).push(
         new MaterialPageRoute(
           builder: (context) => Scaffold(
                 appBar: AppBar(
-                    title: Text("Showing $searchquery at ${activeStore.location}.",
-                    textScaleFactor: 0.7,)),
+                    title: Text(
+                  "Showing $searchquery at ${activeStore.location}.",
+                  textScaleFactor: 0.7,
+                )),
                 body:
                     _showResultsBody(fetchProduct(searchquery, activeStore.id)),
               ),
@@ -51,13 +53,11 @@ class _SearchWidgetState extends State<SearchWidget> {
   void initState() {
     super.initState();
     widget.searchServie.readSearches().then((List value) {
-      setState((){
-        _lastSearches = value ?? [];
+      setState(() {
+        _lastSearches = Set.from(value) ?? Set();
       });
     });
-
   }
-
 
   void handleActiveStoreChanged(Store store) async {
     _searchProduct(searchquery);
@@ -68,10 +68,17 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   void _handlePillTap(String inp) {
     setState(() {
+      searchquery = inp;
+      controller.text = '';
       controller.text = inp;
     });
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   String prodUrl(String query, String storeid) {
     return 'https://cxchecker.appspot.com/querycx?query=$query&location=$storeid';
@@ -115,7 +122,9 @@ class _SearchWidgetState extends State<SearchWidget> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _lastSearches.map((i) => _lastSearchWidget(i, _handlePillTap)).toList(),
+            children: _lastSearches
+                .map((i) => _lastSearchWidget(i, _handlePillTap))
+                .toList(),
           )
         ],
       ),
@@ -137,16 +146,13 @@ Widget _radioWidget(
   );
 }
 
-Widget _lastSearchWidget(
-  String value, handler ) {
+Widget _lastSearchWidget(String value, handler) {
   return GestureDetector(
     onTap: handler(value),
     child: Container(
-    child: Chip(
+        child: Chip(
       label: Text(value),
-
-    )
-   ),
+    )),
   );
 }
 
