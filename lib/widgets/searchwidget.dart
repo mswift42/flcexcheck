@@ -43,15 +43,16 @@ class _SearchWidgetState extends State<SearchWidget> {
     }
   }
 
-  void _setSearchQueryText(String inp) {
-    setState(() {
-      searchquery = inp;
-    });
+  void _setSearchQueryText() {
+      setState(() {
+        searchquery = controller.text;
+      });
   }
 
   @override
   void initState() {
     super.initState();
+    controller.addListener(_setSearchQueryText);
     widget.searchServie.readSearches().then((List value) {
       setState(() {
         _lastSearches = Set.from(value) ?? Set();
@@ -69,13 +70,13 @@ class _SearchWidgetState extends State<SearchWidget> {
   void _handlePillTap(String inp) {
     setState(() {
       searchquery = inp;
-      controller.text = '';
       controller.text = inp;
     });
   }
 
   @override
   void dispose() {
+    controller.removeListener(_setSearchQueryText);
     controller.dispose();
     super.dispose();
   }
