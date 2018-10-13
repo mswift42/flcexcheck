@@ -110,7 +110,6 @@ class _SearchWidgetState extends State<SearchWidget> {
             child: TextField(
               controller: controller,
               onSubmitted: _searchProduct,
-              onChanged: _setSearchQueryText,
             ),
             padding: EdgeInsets.symmetric(vertical: 6.00, horizontal: 8.00),
           ),
