@@ -44,9 +44,8 @@ class _SearchWidgetState extends State<SearchWidget> {
   }
 
   void _setSearchQueryText() {
-      setState(() {
-        searchquery = controller.text;
-      });
+    setState(() {
+    });
   }
 
   @override
@@ -73,6 +72,13 @@ class _SearchWidgetState extends State<SearchWidget> {
       controller.text = inp;
     });
   }
+
+  void _removeFromSearches(String inp) {
+    setState(() {
+      _lastSearches.remove(inp);
+    });
+  }
+
 
   @override
   void dispose() {
@@ -123,7 +129,8 @@ class _SearchWidgetState extends State<SearchWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _lastSearches
-                .map((i) => _lastSearchWidget(i, _handlePillTap))
+                .map((i) => _lastSearchWidget(i,
+                _handlePillTap, _removeFromSearches))
                 .toList(),
           )
         ],
@@ -146,12 +153,14 @@ Widget _radioWidget(
   );
 }
 
-Widget _lastSearchWidget(String value, handler) {
+Widget _lastSearchWidget(String value, taphandler, deleteHandler) {
   return GestureDetector(
-    onTap: handler(value),
+    onTap: taphandler(value),
     child: Container(
         child: Chip(
       label: Text(value),
+          deleteIcon: Icon(Icons.delete),
+          onDeleted: deleteHandler(value),
     )),
   );
 }
