@@ -75,7 +75,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   void _removeFromSearches(String inp) {
     setState(() {
-      _lastSearches.remove(inp);
+    //  _lastSearches.remove(inp);
     });
   }
 
