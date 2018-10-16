@@ -19,9 +19,20 @@ class LastSearchWidget extends StatelessWidget {
   final ValueChanged<String> onDeleted;
 
   LastSearchWidget(this.value, this.onDeleted);
+
+  void _handleOnDelete() {
+    onDeleted(value);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Chip(
+        label: Text(value),
+        deleteIcon: Icon(Icons.delete),
+        onDeleted: _handleOnDelete,
+      ),
+    );
   }
 }
 
