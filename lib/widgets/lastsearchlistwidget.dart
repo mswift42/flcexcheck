@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class  LastSearchList extends StatelessWidget {
+  final ValueChanged<String> onDeleted;
   List<String> _lastSearches;
+  LastSearchList(this.onDeleted, this._lastSearches);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,9 +15,10 @@ class  LastSearchList extends StatelessWidget {
 }
 
 class LastSearchWidget extends StatelessWidget {
+  final String value;
   final ValueChanged<String> onDeleted;
 
-  LastSearchWidget(this.onDeleted);
+  LastSearchWidget(this.value, this.onDeleted);
   @override
   Widget build(BuildContext context) {
     return Container();
