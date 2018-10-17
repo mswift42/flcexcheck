@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flcexcheck/widgets/productswidget.dart';
 import 'package:flcexcheck/last_search_service.dart';
+import 'package:flcexcheck/widgets/lastsearchlistwidget.dart';
 
 class SearchWidget extends StatefulWidget {
   final LastSearchService searchServie = LastSearchService();
@@ -73,12 +74,6 @@ class _SearchWidgetState extends State<SearchWidget> {
     });
   }
 
-  void _removeFromSearches(String inp) {
-    setState(() {
-    //  _lastSearches.remove(inp);
-    });
-  }
-
 
   @override
   void dispose() {
@@ -106,6 +101,11 @@ class _SearchWidgetState extends State<SearchWidget> {
       throw Exception("Failed to load product");
     }
   }
+  void _handleDelete(String value) {
+    setState(() {
+      _lastSearches.remove(value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,12 +126,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                     _radioWidget(i, activeStore, handleActiveStoreChanged))
                 .toList(),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _lastSearches
-                .map((i) => _lastSearchWidget(i,
-                _handlePillTap, _removeFromSearches))
-                .toList(),
+          LastSearchGrid(
+            _handleDelete, _lastSearches.toList()
           )
         ],
       ),
