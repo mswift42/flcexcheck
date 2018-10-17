@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 
-class  LastSearchList extends StatelessWidget {
+class  LastSearchGrid extends StatelessWidget {
   final ValueChanged<String> onDeleted;
-  List<String> _lastSearches;
-  LastSearchList(this.onDeleted, this._lastSearches);
+  final List<String> _lastSearches;
+  LastSearchGrid(this.onDeleted, this._lastSearches);
+
+  void _handleOnDelete(String value) {
+    onDeleted(value);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
       child: GridView.extent(
         maxCrossAxisExtent: 180.0,
-        children: <Widget>[],)
+        children: _lastSearches.map((i) => LastSearchWidget(
+          i, _handleOnDelete)
+        ).toList(),
+      )
     );
   }
 }
