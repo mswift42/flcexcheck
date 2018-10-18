@@ -45,8 +45,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   }
 
   void _setSearchQueryText() {
-    setState(() {
-    });
+    searchquery = controller.text;
   }
 
   @override
