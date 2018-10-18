@@ -61,16 +61,17 @@ class _SearchWidgetState extends State<SearchWidget> {
   }
 
   void handleActiveStoreChanged(Store store) async {
-    _searchProduct(searchquery);
     setState(() {
       activeStore = store;
     });
+    _searchProduct(searchquery);
   }
 
   void _handlePillTap(String inp) {
     setState(() {
       searchquery = inp;
       controller.text = inp;
+      _searchProduct(searchquery);
     });
   }
 
