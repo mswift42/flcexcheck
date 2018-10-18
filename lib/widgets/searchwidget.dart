@@ -127,7 +127,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 .toList(),
           ),
           LastSearchGrid(
-            _handleDelete, _lastSearches.toList()
+            _handleDelete, _handlePillTap, _lastSearches.toList()
           )
         ],
       ),
@@ -146,18 +146,6 @@ Widget _radioWidget(
         onChanged: handler,
       ),
     ],
-  );
-}
-
-Widget _lastSearchWidget(String value, taphandler, deleteHandler) {
-  return GestureDetector(
-    onTap: taphandler(value),
-    child: Container(
-        child: Chip(
-      label: Text(value),
-          deleteIcon: Icon(Icons.delete),
-          onDeleted: deleteHandler(value),
-    )),
   );
 }
 
