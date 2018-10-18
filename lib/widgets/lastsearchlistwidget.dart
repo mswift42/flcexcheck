@@ -17,10 +17,9 @@ class LastSearchGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: GridView.extent(
-          shrinkWrap:true ,
-      maxCrossAxisExtent: 140.0,
-      crossAxisSpacing: 20.0,
+        child: Wrap(
+          spacing: 12.0,
+      runSpacing: 4.0,
       children: _lastSearches
           .map((i) => LastSearchWidget(i, _handleOnDelete, _handleOnTap))
           .toList(),
