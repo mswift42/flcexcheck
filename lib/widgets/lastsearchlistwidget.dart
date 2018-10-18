@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class  LastSearchGrid extends StatelessWidget {
+class LastSearchGrid extends StatelessWidget {
   final ValueChanged<String> onDeleted;
   final List<String> _lastSearches;
   LastSearchGrid(this.onDeleted, this._lastSearches);
@@ -8,38 +8,45 @@ class  LastSearchGrid extends StatelessWidget {
   void _handleOnDelete(String value) {
     onDeleted(value);
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: GridView.extent(
-        maxCrossAxisExtent: 180.0,
-        children: _lastSearches.map((i) => LastSearchWidget(
-          i, _handleOnDelete)
-        ).toList(),
-      )
-    );
+        child: GridView.extent(
+      maxCrossAxisExtent: 180.0,
+      children: _lastSearches
+          .map((i) => LastSearchWidget(i, _handleOnDelete))
+          .toList(),
+    ));
   }
 }
 
 class LastSearchWidget extends StatelessWidget {
   final String value;
   final ValueChanged<String> onDeleted;
+  final ValueChanged<String> onTapped;
 
-  LastSearchWidget(this.value, this.onDeleted);
+  LastSearchWidget(this.value, this.onDeleted, this.onTapped);
 
   void _handleOnDelete() {
     onDeleted(value);
+  }
+
+  void _handleTap() {
+    onTapped(value);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Chip(
-        label: Text(value),
+        label: GestureDetector(
+          child: Text(value),
+          onTap: _handleTap,
+        ),
         deleteIcon: Icon(Icons.delete),
         onDeleted: _handleOnDelete,
       ),
     );
   }
 }
-
