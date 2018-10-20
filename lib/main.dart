@@ -9,6 +9,16 @@ class FlCexApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.blueGrey,
+        accentColor: Colors.grey,
+        textTheme: TextTheme(
+          body1: TextStyle(fontWeight: FontWeight.w500),
+          body2: TextStyle(fontWeight: FontWeight.w700),
+
+        )
+      ),
       title: 'CexCheck',
       home: Scaffold(
         appBar: AppBar(
