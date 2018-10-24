@@ -11,8 +11,8 @@ class FlCexApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: Colors.blueGrey,
-        accentColor: Colors.grey,
+        primaryColor: Colors.cyan[600],
+        accentColor: Colors.blueGrey[500],
         textTheme: TextTheme(
           body1: TextStyle(fontWeight: FontWeight.w500),
           body2: TextStyle(fontWeight: FontWeight.w700),
