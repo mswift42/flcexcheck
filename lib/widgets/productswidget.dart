@@ -45,7 +45,12 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               ListTile(
-                title: Text(product.title),
+                title: Text(
+                  product.title,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                  ),
+                ),
                 subtitle: Text(
                   (product.price == null)
                       ? "0"
