@@ -47,7 +47,11 @@ class ProductCard extends StatelessWidget {
                     product.price.toStringAsFixed(
                       product.price.truncateToDouble() == product.price ?
                           0 : 2
-                    )
+                    ),
+                  style: TextStyle(color: Colors.grey[700],
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                  ),
                 ),
               ),
             ],
