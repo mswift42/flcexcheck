@@ -33,14 +33,14 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
       child: Container(
-        margin: EdgeInsets.all(4.0),
+        margin: EdgeInsets.all(2.0),
         child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(6.0),
+                  padding: EdgeInsets.all(4.0),
                   child: ProductImage(product.thumbnail),
                 ),
               ),
@@ -48,7 +48,7 @@ class ProductCard extends StatelessWidget {
                 title: Text(
                   product.title,
                   style: TextStyle(
-                    fontSize: 14.0,
+                    fontSize: 13.0,
                   ),
                 ),
                 subtitle: Text(
@@ -61,7 +61,7 @@ class ProductCard extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                   ),
                 ),
               ),
@@ -82,8 +82,8 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageurl,
-      fit: BoxFit.contain,
-      width: 300.00,
+      fit: BoxFit.fitHeight,
+      height: 600.00,
     );
   }
 }
