@@ -82,7 +82,7 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageurl,
-      fit: BoxFit.fitHeight,
+      fit: BoxFit.contain,
       height: 600.00,
     );
   }
