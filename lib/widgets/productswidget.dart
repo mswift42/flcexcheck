@@ -18,15 +18,15 @@ class ProductsWidget extends StatelessWidget {
       );
     }
     return GridView.extent(
-        maxCrossAxisExtent: 420.0,
-        children: products.map((i) => ProductCard(i)).toList());
+        maxCrossAxisExtent: 340.0,
+        children: products.map((i) => ProductWidget(i)).toList());
   }
 }
 
-class ProductCard extends StatelessWidget {
+class ProductWidget extends StatelessWidget {
   final Product product;
 
-  ProductCard(this.product);
+  ProductWidget(this.product);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
     );
     final _prodtextline = product.title.split(',');
     final _des = _prodtextline[0];
-    final _condition = _prodtextline[1];
+    final _condition = (_prodtextline.length == 2) ? _prodtextline[1] : '?';
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
       child: GridTile(
@@ -100,8 +100,7 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageurl,
-      fit: BoxFit.scaleDown,
-      height: 600.00,
+      fit: BoxFit.contain,
     );
   }
 }
