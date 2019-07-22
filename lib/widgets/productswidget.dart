@@ -30,6 +30,10 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ts = TextStyle(
+      fontSize: 12.0,
+      color: Colors.white,
+    );
     final _prodtextline = product.title.split(',');
     final _des = _prodtextline[0];
     final _condition = _prodtextline[1];
@@ -40,12 +44,13 @@ class ProductCard extends StatelessWidget {
           backgroundColor: Colors.black54,
           title: Text(
             ' ' + _des,
-            style: TextStyle(
-              fontSize: 12.0,
-            ),
+            style: _ts,
           ),
-          subtitle:
-              new _ProductBottomLine(product: product, condition: _condition),
+          subtitle: new _ProductBottomLine(
+            product: product,
+            condition: _condition,
+            textstyle: _ts,
+          ),
         ),
         child: ProductImage(product.thumbnail),
       ),
@@ -58,10 +63,12 @@ class _ProductBottomLine extends StatelessWidget {
     Key key,
     @required this.product,
     @required this.condition,
+    @required this.textstyle,
   }) : super(key: key);
 
   final Product product;
   final String condition;
+  final TextStyle textstyle;
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +77,14 @@ class _ProductBottomLine extends StatelessWidget {
       children: <Widget>[
         Text(
           condition,
-          style: TextStyle(fontSize: 12.0),
+          style: textstyle,
         ),
         Text(
           (product.price == null)
               ? "0"
               : product.price.toStringAsFixed(
                   product.price.truncateToDouble() == product.price ? 0 : 2),
-          style: TextStyle(color: Colors.white, fontSize: 12.0),
+          style: textstyle,
         ),
       ],
     );
