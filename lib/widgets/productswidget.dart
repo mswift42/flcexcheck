@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flcexcheck/product.dart' show Product;
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductsWidget extends StatelessWidget {
@@ -33,40 +33,29 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
       child: Container(
-        margin: EdgeInsets.all(2.0),
         child: GridTile(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(4.0),
-                  child: ProductImage(product.thumbnail),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  product.title,
-                  style: TextStyle(
-                    fontSize: 13.0,
-                  ),
-                ),
-                subtitle: Text(
-                  (product.price == null)
-                      ? "0"
-                      : product.price.toStringAsFixed(
-                          product.price.truncateToDouble() == product.price
-                              ? 0
-                              : 2),
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          child: ProductImage(product.thumbnail),
+//              ListTile(
+//                title: Text(
+//                  product.title,
+//                  style: TextStyle(
+//                    fontSize: 13.0,
+//                  ),
+//                ),
+//                subtitle: Text(
+//                  (product.price == null)
+//                      ? "0"
+//                      : product.price.toStringAsFixed(
+//                          product.price.truncateToDouble() == product.price
+//                              ? 0
+//                              : 2),
+//                  style: TextStyle(
+//                    color: Colors.grey[700],
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 14.0,
+//                  ),
+//                ),
+//              ),
         ),
       ),
     );
