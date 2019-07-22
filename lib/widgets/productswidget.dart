@@ -30,25 +30,50 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _prodtextline = product.title.split(',');
+    final _des = _prodtextline[0];
+    final _condition = _prodtextline[1];
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black54,
           title: Text(
-            product.title,
-            style: TextStyle(fontSize: 12.0),
+            _des,
+            style: TextStyle(
+              fontSize: 11.0,
+              letterSpacing: 0.03,
+            ),
           ),
-          subtitle: Text(
-            (product.price == null)
-                ? "0"
-                : product.price.toStringAsFixed(
-                    product.price.truncateToDouble() == product.price ? 0 : 2),
-            style: TextStyle(color: Colors.white),
-          ),
+          subtitle: new _productBottomLine(product: product),
         ),
         child: ProductImage(product.thumbnail),
       ),
+    );
+  }
+}
+
+class _productBottomLine extends StatelessWidget {
+  const _productBottomLine({
+    Key key,
+    @required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Text()
+        Text(
+          (product.price == null)
+              ? "0"
+              : product.price.toStringAsFixed(
+                  product.price.truncateToDouble() == product.price ? 0 : 2),
+          style: TextStyle(color: Colors.white),
+        ),
+      ],
     );
   }
 }
