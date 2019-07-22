@@ -41,11 +41,11 @@ class ProductCard extends StatelessWidget {
           title: Text(
             _des,
             style: TextStyle(
-              fontSize: 11.0,
-              letterSpacing: 0.03,
+              fontSize: 12.0,
             ),
           ),
-          subtitle: new _productBottomLine(product: product),
+          subtitle:
+              new _ProductBottomLine(product: product, condition: _condition),
         ),
         child: ProductImage(product.thumbnail),
       ),
@@ -53,19 +53,22 @@ class ProductCard extends StatelessWidget {
   }
 }
 
-class _productBottomLine extends StatelessWidget {
-  const _productBottomLine({
+class _ProductBottomLine extends StatelessWidget {
+  const _ProductBottomLine({
     Key key,
     @required this.product,
+    @required this.condition,
   }) : super(key: key);
 
   final Product product;
+  final String condition;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text()
+        Text(condition),
         Text(
           (product.price == null)
               ? "0"
