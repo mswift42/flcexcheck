@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black54,
           title: Text(
-            _des,
+            ' ' + _des,
             style: TextStyle(
               fontSize: 12.0,
             ),
@@ -68,13 +68,16 @@ class _ProductBottomLine extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text(condition),
+        Text(
+          condition,
+          style: TextStyle(fontSize: 12.0),
+        ),
         Text(
           (product.price == null)
               ? "0"
               : product.price.toStringAsFixed(
                   product.price.truncateToDouble() == product.price ? 0 : 2),
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 12.0),
         ),
       ],
     );
