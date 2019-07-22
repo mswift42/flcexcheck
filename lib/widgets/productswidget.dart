@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flcexcheck/product.dart' show Product;
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductsWidget extends StatelessWidget {
@@ -17,8 +18,7 @@ class ProductsWidget extends StatelessWidget {
       );
     }
     return GridView.extent(
-        maxCrossAxisExtent: 320.0,
-        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+        maxCrossAxisExtent: 420.0,
         children: products.map((i) => ProductCard(i)).toList());
   }
 }
@@ -32,42 +32,22 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
-      child: Container(
-        margin: EdgeInsets.all(2.0),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(4.0),
-                  child: ProductImage(product.thumbnail),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  product.title,
-                  style: TextStyle(
-                    fontSize: 13.0,
-                  ),
-                ),
-                subtitle: Text(
-                  (product.price == null)
-                      ? "0"
-                      : product.price.toStringAsFixed(
-                          product.price.truncateToDouble() == product.price
-                              ? 0
-                              : 2),
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                ),
-              ),
-            ],
+      child: GridTile(
+        footer: GridTileBar(
+          backgroundColor: Colors.black54,
+          title: Text(
+            product.title,
+            style: TextStyle(fontSize: 12.0),
+          ),
+          subtitle: Text(
+            (product.price == null)
+                ? "0"
+                : product.price.toStringAsFixed(
+                    product.price.truncateToDouble() == product.price ? 0 : 2),
+            style: TextStyle(color: Colors.white),
           ),
         ),
+        child: ProductImage(product.thumbnail),
       ),
     );
   }
@@ -82,7 +62,7 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageurl,
-      fit: BoxFit.contain,
+      fit: BoxFit.scaleDown,
       height: 600.00,
     );
   }
