@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flcexcheck/store.dart' show Store;
-import 'package:flcexcheck/product.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'package:flcexcheck/widgets/productswidget.dart';
+
 import 'package:flcexcheck/last_search_service.dart';
+import 'package:flcexcheck/product.dart';
+import 'package:flcexcheck/store.dart' show Store;
 import 'package:flcexcheck/widgets/lastsearchlistwidget.dart';
+import 'package:flcexcheck/widgets/productswidget.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class SearchWidget extends StatefulWidget {
   final LastSearchService searchServie = LastSearchService();
@@ -31,14 +32,13 @@ class _SearchWidgetState extends State<SearchWidget> {
       Navigator.of(context).push(
         new MaterialPageRoute(
           builder: (context) => Scaffold(
-                appBar: AppBar(
-                    title: Text(
-                  "Showing $searchquery at ${activeStore.location}.",
-                  textScaleFactor: 0.7,
-                )),
-                body:
-                    _showResultsBody(fetchProduct(searchquery, activeStore.id)),
-              ),
+            appBar: AppBar(
+                title: Text(
+              "Showing $searchquery at ${activeStore.location}.",
+              textScaleFactor: 0.7,
+            )),
+            body: _showResultsBody(fetchProduct(searchquery, activeStore.id)),
+          ),
         ),
       );
     }
@@ -74,7 +74,6 @@ class _SearchWidgetState extends State<SearchWidget> {
     });
   }
 
-
   @override
   void dispose() {
     controller.removeListener(_setSearchQueryText);
@@ -101,6 +100,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       throw Exception("Failed to load product");
     }
   }
+
   void _handleDelete(String value) {
     setState(() {
       _lastSearches.remove(value);
@@ -126,9 +126,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     _radioWidget(i, activeStore, handleActiveStoreChanged))
                 .toList(),
           ),
-          LastSearchGrid(
-            _handleDelete, _handlePillTap, _lastSearches.toList()
-          )
+          LastSearchGrid(_handleDelete, _handlePillTap, _lastSearches.toList())
         ],
       ),
     );
@@ -165,6 +163,7 @@ FutureBuilder<List<Product>> _showResultsBody(Future<List<Product>> handler) {
           }
           return ProductsWidget(snapshot.data);
       }
+      return null;
     },
   );
 }
