@@ -17,7 +17,7 @@ class ProductsWidget extends StatelessWidget {
       );
     }
     return GridView.extent(
-        maxCrossAxisExtent: 320.0,
+        maxCrossAxisExtent: 480.0,
         padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
         children: products.map((i) => ProductCard(i)).toList());
   }
@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
       onTap: () => _launchUrl(product.url),
       child: Container(
         margin: EdgeInsets.all(2.0),
-        child: Card(
+        child: GridTile(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
