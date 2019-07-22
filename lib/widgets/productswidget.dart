@@ -1,5 +1,6 @@
 import 'package:flcexcheck/product.dart' show Product;
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductsWidget extends StatelessWidget {
@@ -18,7 +19,6 @@ class ProductsWidget extends StatelessWidget {
     }
     return GridView.extent(
         maxCrossAxisExtent: 480.0,
-        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
         children: products.map((i) => ProductCard(i)).toList());
   }
 }
@@ -32,9 +32,22 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
-      child: Container(
-        child: GridTile(
-          child: ProductImage(product.thumbnail),
+      child: GridTile(
+        footer: GridTileBar(
+          backgroundColor: Colors.black54,
+          title: Text(
+            product.title,
+            style: TextStyle(fontSize: 12.0),
+          ),
+          subtitle: Text(
+            (product.price == null)
+                ? "0"
+                : product.price.toStringAsFixed(
+                    product.price.truncateToDouble() == product.price ? 0 : 2),
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        child: ProductImage(product.thumbnail),
 //              ListTile(
 //                title: Text(
 //                  product.title,
@@ -56,7 +69,6 @@ class ProductCard extends StatelessWidget {
 //                  ),
 //                ),
 //              ),
-        ),
       ),
     );
   }
