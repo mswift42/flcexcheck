@@ -18,7 +18,7 @@ class ProductsWidget extends StatelessWidget {
       );
     }
     return GridView.extent(
-        maxCrossAxisExtent: 480.0,
+        maxCrossAxisExtent: 420.0,
         children: products.map((i) => ProductCard(i)).toList());
   }
 }
@@ -48,27 +48,6 @@ class ProductCard extends StatelessWidget {
           ),
         ),
         child: ProductImage(product.thumbnail),
-//              ListTile(
-//                title: Text(
-//                  product.title,
-//                  style: TextStyle(
-//                    fontSize: 13.0,
-//                  ),
-//                ),
-//                subtitle: Text(
-//                  (product.price == null)
-//                      ? "0"
-//                      : product.price.toStringAsFixed(
-//                          product.price.truncateToDouble() == product.price
-//                              ? 0
-//                              : 2),
-//                  style: TextStyle(
-//                    color: Colors.grey[700],
-//                    fontWeight: FontWeight.bold,
-//                    fontSize: 14.0,
-//                  ),
-//                ),
-//              ),
       ),
     );
   }
@@ -83,7 +62,7 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageurl,
-      fit: BoxFit.contain,
+      fit: BoxFit.scaleDown,
       height: 600.00,
     );
   }
