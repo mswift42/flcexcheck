@@ -18,7 +18,9 @@ class ProductsWidget extends StatelessWidget {
       );
     }
     return GridView.extent(
-        maxCrossAxisExtent: 340.0,
+        maxCrossAxisExtent: 320.0,
+        mainAxisSpacing: 4.0,
+        crossAxisSpacing: 2.0,
         children: products.map((i) => ProductWidget(i)).toList());
   }
 }
@@ -31,7 +33,7 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ts = TextStyle(
-      fontSize: 12.0,
+      fontSize: 11.0,
       color: Colors.white,
     );
     final _prodtextline = product.title.split(',');
