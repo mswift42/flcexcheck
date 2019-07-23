@@ -17,19 +17,20 @@ class LastSearchService {
   }
 
   Future<File> writeSearches(List<String> searches) async {
-    final File = await _localFile;
-    return File.writeAsString(searches.join(','));
+    final file = await _localFile;
+    return file.writeAsString(searches.join(','));
   }
 
   Future<List<String>> readSearches() async {
     try {
-      final File = await _localFile;
+      final file = await _localFile;
 
-      String contents = await File.readAsString();
+      String contents = await file.readAsString();
       return contents.split(',');
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
 
