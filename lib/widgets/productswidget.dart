@@ -19,8 +19,8 @@ class ProductsWidget extends StatelessWidget {
     }
     return GridView.extent(
         maxCrossAxisExtent: 320.0,
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 2.0,
+        mainAxisSpacing: 12.0,
+        crossAxisSpacing: 0.5,
         children: products.map((i) => ProductWidget(i)).toList());
   }
 }
@@ -102,7 +102,8 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageurl,
-      fit: BoxFit.contain,
+      fit: BoxFit.scaleDown,
+      height: 80.0,
     );
   }
 }
