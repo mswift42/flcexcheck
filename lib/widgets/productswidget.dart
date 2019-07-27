@@ -41,20 +41,26 @@ class ProductWidget extends StatelessWidget {
     final _condition = (_prodtextline.length == 2) ? _prodtextline[1] : '?';
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
-      child: GridTile(
-        footer: GridTileBar(
-          backgroundColor: Colors.black54,
-          title: Text(
-            ' ' + _des,
-            style: _ts,
-          ),
-          subtitle: new _ProductBottomLine(
-            product: product,
-            condition: _condition,
-            textstyle: _ts,
-          ),
+      child: Card(
+        child: Column(
+          children: <Widget>[
+//          backgroundColor: Colors.black54,
+//          title: Text(
+//            ' ' + _des,
+//            style: _ts,
+//          ),
+//          subtitle: new _ProductBottomLine(
+//            product: product,
+//            condition: _condition,
+//            textstyle: _ts,
+//          ),
+//        ),
+            AspectRatio(
+              child: ProductImage(product.thumbnail),
+              aspectRatio: ,
+            ),
+          ],
         ),
-        child: ProductImage(product.thumbnail),
       ),
     );
   }
