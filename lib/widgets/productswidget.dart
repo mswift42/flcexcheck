@@ -19,8 +19,8 @@ class ProductsWidget extends StatelessWidget {
     }
     return GridView.extent(
         maxCrossAxisExtent: 320.0,
-        mainAxisSpacing: 12.0,
-        crossAxisSpacing: 0.5,
+        mainAxisSpacing: 2.0,
+        crossAxisSpacing: 1.0,
         children: products.map((i) => ProductWidget(i)).toList());
   }
 }
@@ -33,8 +33,8 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ts = TextStyle(
-      fontSize: 11.0,
-      color: Colors.white,
+      fontSize: 10.0,
+      color: Colors.black,
     );
     final _prodtextline = product.title.split(',');
     final _des = _prodtextline[0];
@@ -42,26 +42,29 @@ class ProductWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => _launchUrl(product.url),
       child: Card(
-        child: Column(
-          children: <Widget>[
-//          backgroundColor: Colors.black54,
-//          title: Text(
-//            ' ' + _des,
-//            style: _ts,
-//          ),
-//          subtitle: new _ProductBottomLine(
-//            product: product,
-//            condition: _condition,
-//            textstyle: _ts,
-//          ),
-//        ),
-            AspectRatio(
-              child: ProductImage(product.thumbnail),
-              aspectRatio: ,
-            ),
-          ],
-        ),
-      ),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+              constraints: BoxConstraints(
+                maxHeight: 210.0,
+              ),
+              child: ProductImage(product.thumbnail)),
+          Column(
+            children: <Widget>[
+              Text(
+                _des,
+                style: _ts,
+              ),
+              _ProductBottomLine(
+                product: product,
+                condition: _condition,
+                textstyle: _ts,
+              ),
+            ],
+          ),
+        ],
+      )),
     );
   }
 }
@@ -106,10 +109,13 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      imageurl,
-      fit: BoxFit.scaleDown,
-      height: 80.0,
+    return FractionallySizedBox(
+      heightFactor: 0.6,
+      widthFactor: 1.0,
+      child: Image.network(
+        imageurl,
+        fit: BoxFit.fitHeight,
+      ),
     );
   }
 }
