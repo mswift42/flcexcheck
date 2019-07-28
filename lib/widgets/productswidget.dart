@@ -47,15 +47,25 @@ class ProductWidget extends StatelessWidget {
         children: <Widget>[
           Container(
               constraints: BoxConstraints(
-                maxHeight: 210.0,
+                maxHeight: 190.0,
               ),
               child: ProductImage(product.thumbnail)),
           Column(
             children: <Widget>[
-              Text(
-                _des,
-                style: _ts,
-                textAlign: TextAlign.left,
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Wrap(
+                    children: <Widget>[
+                      Text(
+                        _des,
+                        style: _ts,
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               _ProductBottomLine(
                 product: product,
@@ -87,10 +97,12 @@ class _ProductBottomLine extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text(
-          condition,
-          style: textstyle,
-          textAlign: TextAlign.left,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            condition,
+            style: textstyle,
+          ),
         ),
         Text(
           (product.price == null)
