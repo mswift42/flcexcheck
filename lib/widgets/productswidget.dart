@@ -55,6 +55,7 @@ class ProductWidget extends StatelessWidget {
               Text(
                 _des,
                 style: _ts,
+                textAlign: TextAlign.left,
               ),
               _ProductBottomLine(
                 product: product,
@@ -89,6 +90,7 @@ class _ProductBottomLine extends StatelessWidget {
         Text(
           condition,
           style: textstyle,
+          textAlign: TextAlign.left,
         ),
         Text(
           (product.price == null)
@@ -96,6 +98,7 @@ class _ProductBottomLine extends StatelessWidget {
               : product.price.toStringAsFixed(
                   product.price.truncateToDouble() == product.price ? 0 : 2),
           style: textstyle,
+          textAlign: TextAlign.right,
         ),
       ],
     );
