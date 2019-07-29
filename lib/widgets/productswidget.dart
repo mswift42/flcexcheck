@@ -126,14 +126,10 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      heightFactor: 0.6,
-      widthFactor: 1.0,
-      child: Container(
-        child: Image.network(
-          imageurl,
-          fit: BoxFit.scaleDown,
-        ),
+    return Container(
+      child: Image.network(
+        imageurl,
+        fit: BoxFit.contain,
       ),
     );
   }
