@@ -124,6 +124,7 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 4.0, bottom: 4.0),
       child: Image.network(
         imageurl,
         fit: BoxFit.contain,
