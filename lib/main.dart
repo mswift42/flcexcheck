@@ -12,8 +12,8 @@ class FlCexApp extends StatelessWidget {
             primaryColor: Color.fromARGB(255, 223, 33, 39),
             accentColor: Color.fromARGB( 255, 0, 105, 179),
             textTheme: TextTheme(
-              body1: TextStyle(fontWeight: FontWeight.w500),
-              body2: TextStyle(fontWeight: FontWeight.w700),
+              body1: TextStyle(color: Colors.black87 ),
+              body2: TextStyle(fontWeight: FontWeight.w700, color: Colors.black54),
             )),
         title: 'CexCheck',
         home: Scaffold(
