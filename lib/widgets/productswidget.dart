@@ -45,11 +45,13 @@ class ProductWidget extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(
-              constraints: BoxConstraints(
-                maxHeight: 190.0,
-              ),
-              child: ProductImage(product.thumbnail)),
+          Expanded(
+            child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: 200.0,
+                ),
+                child: ProductImage(product.thumbnail)),
+          ),
           Column(
             children: <Widget>[
               Padding(
@@ -127,9 +129,11 @@ class ProductImage extends StatelessWidget {
     return FractionallySizedBox(
       heightFactor: 0.6,
       widthFactor: 1.0,
-      child: Image.network(
-        imageurl,
-        fit: BoxFit.fitHeight,
+      child: Container(
+        child: Image.network(
+          imageurl,
+          fit: BoxFit.scaleDown,
+        ),
       ),
     );
   }
