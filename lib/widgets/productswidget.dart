@@ -33,8 +33,8 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ts = TextStyle(
-      fontSize: 10.0,
-      color: Colors.black,
+      fontSize: 11.0,
+      color: Colors.black87,
     );
     final _prodtextline = product.title.split(',');
     final _des = _prodtextline[0];
